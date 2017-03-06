@@ -1,0 +1,16 @@
+
+URLs
+Microchip ATSAMD21
+http://www.microchip.com/wwwproducts/en/ATSAMD21G18
+
+
+
+* SW1 is awfully close to the RF connection on U7. Can this slide south? Pins 15/15/17/18 are all no connect, having a switch close to that would be easier. 
+* If you move J7 to the other side of the board, then we won't need a via in the middle of the RF transmission line there. 
+* R16 is sized to bias A1 at about 3 mA. the default is to toggle on/off when it's locking, then go low when the system is locked. Bumping R16 to ~ 1Kohm will half the current, which might be enough for a high brightness LED. 
+* Vbackup on U7 might be worthwhile to hookup. the current consumption is pretty low (7 uA) and will let the GPS lock faster when power is applied. 
+* The BQ24074 supports temp sensing on the battery pack, but the JST connector only has Batt+ and GND. Did you set the charging current on the low side?
+* J1 is an SMT part. Is there one available with through hole mounting pins so the connector doesn't rip off the board?
+* Could J3 get flipped so that the RF path stays on the bottom, instead of running through a Via? 
+* If you rotate C1/C2 180 degrees, you can ground both of them at the same via/Ground node. 
+* The RFM95 sits right underneath the 32kHz Clock crystal for the SAMD21. The 32kHz is a fairly strong oscillator (32kHz Square wave that goes 0 to 3.3V) and I'm worried that it will couple directly into the RF output of the RFM95 through the Power supply or directly radiated through the board. A 4 layer board with full ground planes would help significantly. 
